@@ -4,7 +4,7 @@ import {
   RowSelectEventArgs,
   SelectionSettingsModel,
 } from '@syncfusion/ej2-angular-grids';
-import { ProductService } from '../../../Sercices/product.service';
+import { ProductService } from '../../../Services/product.service';
 
 @Component({
   selector: 'sync-grid',
