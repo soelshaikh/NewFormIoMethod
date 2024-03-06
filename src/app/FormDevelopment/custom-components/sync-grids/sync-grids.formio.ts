@@ -16,7 +16,6 @@ export function registerSyncGridNewComponent(injector: Injector) {
    * Use the built-in customElements.define() function to register the configured constructor and its associated custom-element tag with the browser's CustomElementRegistry.
    */
   customElements.define('sync-grid', complexCustomComponent);
-  console.log(customElements.get('sync-grid') == undefined);
 
   /**
    * Once these components are created as a module, they can then easily be added to the renderer using the Formio.use method as follows.

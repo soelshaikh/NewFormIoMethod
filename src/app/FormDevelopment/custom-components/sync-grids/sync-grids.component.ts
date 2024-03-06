@@ -18,11 +18,21 @@ export class SyncGridsComponent {
   public dataSource: any;
   public Record: Object;
   public url = 'https://dummyjson.com/products';
+  /**
+   * Optional property that defines the selection options for a component.
+   * It specifies the mode and type of selection to be used.
+   * Default mode is 'Row' and type is 'Single'.
+   */
   public selectionOptions?: SelectionSettingsModel = {
     mode: 'Row',
     type: 'Single',
   };
 
+  /**
+   * Constructor function of the component.
+   * It initializes the component's properties and subscribes to the ProductService to fetch product data.
+   * Upon receiving the data, it assigns the products to the dataSource property.
+   */
   constructor() {
     this.productService.get().subscribe((res: any) => {
       this.dataSource = res.products;

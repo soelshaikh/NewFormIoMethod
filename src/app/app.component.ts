@@ -20,16 +20,18 @@ import { registerSyncGridNewComponent } from './FormDevelopment/custom-component
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  constructor(inj: Injector) {
-    registerSyncGridNewComponent(inj);
+  constructor(injector: Injector) {
+    // Registers the SyncGridNewComponent using the provided Injector.
+    registerSyncGridNewComponent(injector);
   }
 
   ngOnInit(): void {
+    //Removing Syncfusion premium dialog after 2 seconds
     setTimeout(() => {
       const els = document.querySelectorAll('div[style*="z-index: 999999999"]');
       els.forEach((e) => {
         e.remove();
       });
-    }, 200);
+    }, 2000);
   }
 }

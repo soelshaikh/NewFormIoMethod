@@ -15,7 +15,6 @@ export interface FormioCustomComponentInfo extends BuilderInfo {
   fieldOptions?: string[];
   template?: string;
   changeEvent?: string; // Default: valueChange
-  // defaultValue?: any;
   editForm?: () => { components: ExtendedComponentSchema[] };
 }
 
