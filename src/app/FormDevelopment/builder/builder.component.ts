@@ -43,6 +43,9 @@ export class BuilderComponent implements OnInit {
           default: true, //Indicates whether the custom component is set as the default component.
           weight: 0, //Specifies the weight or priority of the custom component compared to other components.
         },
+        basic: {
+          default: false,
+        },
       },
     };
   }

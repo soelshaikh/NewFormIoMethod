@@ -4,20 +4,20 @@ import {
   RowSelectEventArgs,
   SelectionSettingsModel,
 } from '@syncfusion/ej2-angular-grids';
-import { ProductService } from '../../../Services/product.service';
+
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'sync-grid',
   templateUrl: './sync-grids.component.html',
   standalone: true,
   imports: [GridModule],
-  providers: [ProductService],
 })
 export class SyncGridsComponent {
-  public productService: ProductService = inject(ProductService);
   public dataSource: any;
   public Record: Object;
   public url = 'https://dummyjson.com/products';
+
   /**
    * Optional property that defines the selection options for a component.
    * It specifies the mode and type of selection to be used.
@@ -29,15 +29,18 @@ export class SyncGridsComponent {
   };
 
   /**
-   * Constructor function of the component.
-   * It initializes the component's properties and subscribes to the ProductService to fetch product data.
-   * Upon receiving the data, it assigns the products to the dataSource property.
+   * Constructs the ProductService with HttpClient dependency injection.
+   * Makes an HTTP GET request to fetch product data from the specified URL and populates the dataSource property.
+   * @param http The HttpClient service for making HTTP requests.
    */
-  constructor() {
-    this.productService.get().subscribe((res: any) => {
+  constructor(private http: HttpClient) {
+    // Make an HTTP GET request to fetch product data
+    this.http.get(this.url).subscribe((res: any) => {
+      // Populate the dataSource property with the products obtained from the response
       this.dataSource = res.products;
     });
   }
+  
   ngonInit(): void {
     //Removing Syncfusion premium dialog after 2 seconds
     setTimeout(() => {
