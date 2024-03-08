@@ -3,6 +3,7 @@ import { createCustomElement } from '@angular/elements';
 import { Formio } from 'formiojs';
 import { SyncGridsComponent } from './sync-grids.component';
 import { Components } from 'formiojs';
+import { SettingComponent } from '../../setting/setting.component';
 
 export function registerSyncGridNewComponent(injector: Injector) {
   /**
@@ -27,12 +28,13 @@ export function registerSyncGridNewComponent(injector: Injector) {
   });
 }
 
+const BaseComp = Components.components.textfield;
 /**
  * Dynamically creates a custom Angular component.
  * @returns A custom Angular component class extending a base component.
  */
 function createCustomSyncGridComponent() {
-  return class customComponent extends Components.components.input {
+  return class customComponent extends BaseComp {
     /**
      * This is the default schema of your custom component. It will "derive"
      * from the base class "schema" and extend it with its default JSON schema
@@ -40,6 +42,30 @@ function createCustomSyncGridComponent() {
      * type when defining new components.
      */
     static override schema() {
+      // Extend the existing form component by adding a custom text field component.
+      this.editForm = () => {
+        // Call the editForm method of the superclass to get the base form structure.
+        const listComp = super.editForm();
+        // Add a custom text field component to the form's components array.
+        listComp.components[0]['components'].push({
+          key: 'custom',
+          components: [
+            {
+              weight: 70,
+              type: 'textfield',
+              input: true,
+              key: 'label',
+              label: 'Label',
+              placeholder: 'Field Label',
+              tooltip: 'The label for this field that will appear next to it.',
+            },
+          ],
+          label: 'Custom', // Label for the custom section
+        });
+        // Return the modified form structure.
+        return listComp;
+      };
+
       return super.schema({
         type: 'syncgrid',
         key: 'sync-grid',
