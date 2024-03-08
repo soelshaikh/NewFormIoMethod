@@ -3,7 +3,6 @@ import { createCustomElement } from '@angular/elements';
 import { Formio } from 'formiojs';
 import { SyncGridsComponent } from './sync-grids.component';
 import { Components } from 'formiojs';
-import { SettingComponent } from '../../setting/setting.component';
 
 export function registerSyncGridNewComponent(injector: Injector) {
   /**
@@ -68,6 +67,7 @@ function createCustomSyncGridComponent() {
 
       return super.schema({
         type: 'syncgrid',
+        label: '',
         key: 'sync-grid',
         selector: 'sync-grid',
       });

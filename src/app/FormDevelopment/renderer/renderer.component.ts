@@ -15,6 +15,7 @@ export class RendererComponent implements OnInit {
   public submitedTemplate!: {}; // The submitted template data.
   public isTemplateSelected: boolean = false; // A boolean flag indicating whether a template is selected. Default value is false.
   public isDataSubmited: boolean = false; //A boolean flag indicating whether data has been submitted. Default value is false.
+  form: any;
 
   /**
    * Initializes the component.
@@ -64,7 +65,16 @@ export class RendererComponent implements OnInit {
             addTags: ['sync-grid'], // Additional tags to allow
           },
         }
-      );
+      ).then((form) => {
+        form.on('submit', function () {
+          console.log(form);
+          console.log(form.submission.data);
+          this.isDataSubmited = true;
+          // Store the submitted form data
+          this.submitedTemplate = form.submission.data;
+          
+        });
+      });
     }
   }
 
@@ -76,7 +86,9 @@ export class RendererComponent implements OnInit {
    */
   onSubmitForm(formJson: any) {
     // Set flag indicating data submission
+    console.log(formJson.data);
     this.isDataSubmited = true;
+
     // Store the submitted form data
     this.submitedTemplate = formJson.data;
   }
